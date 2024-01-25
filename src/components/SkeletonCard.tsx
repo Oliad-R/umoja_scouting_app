@@ -13,7 +13,7 @@ export default function SkeletonCard(){
             </CardDescription>
             <CardFooter className="space-x-3 mb-5">
                 <Skeleton className="h-10 w-10"/>
-                <Skeleton className="h-10 w-10"/>
+                {/* <Skeleton className="h-10 w-10"/> */}
                 <Skeleton className="h-10 w-10"/>
             </CardFooter>
         </Card>

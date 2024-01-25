@@ -8,6 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import Loading from './loading'; // Adjust the import path as needed
 import { Value } from '@radix-ui/react-select';
+import Link from 'next/link';
 
 interface Team {
   team_number: number;
@@ -88,11 +89,14 @@ export default function Home() {
 
   return (
     <main>
-      <div className="flex w-full items-center space-x-2"> 
+      <nav>
+        <h1>Scouting App</h1>
+      </nav>
+      <div className="flex w-full items-center sticky bg-black top-0 pt-3 z-10 space-x-2"> 
       {/* Should probably be a multiselect */}
             <Input type="text" placeholder='Search' value={searchInput} onChange={handleSearchChange}/>
             <Select value={filterVal} onValueChange={handleFilterChange}>
-              <SelectTrigger className="w-[280px]">
+              <SelectTrigger className="w-[280px] mb-4">
                 <SelectValue placeholder="Filter"/>
               </SelectTrigger>
               <SelectContent>
@@ -117,7 +121,7 @@ export default function Home() {
                 </SelectGroup>
               </SelectContent>
             </Select>
-            <Button onClick={refreshSearch} variant="secondary" type="button">{refreshIcon()}</Button>
+            <Button onClick={refreshSearch} variant="secondary" type="button" className="mb-4">{refreshIcon()}</Button>
       </div>
       {isLoading ? (
         <Loading />
@@ -133,8 +137,8 @@ export default function Home() {
                   </div>
                 </CardHeader>
                 <CardFooter className="space-x-3">
-                  <Button><Eye/></Button>
-                  <Button><Pencil/></Button>
+                  <Link href={`/team/${team.team_number}?teamName=${team.nickname}`} passHref><Button><Eye/></Button></Link>
+                  {/* <Button><Pencil/></Button> */}
                   <Button onClick={() => togglePinnedTeam(team.team_number)}>{pinIcon(team.team_number)}</Button>
                 </CardFooter>
               </Card>
